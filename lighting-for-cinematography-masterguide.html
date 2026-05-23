@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lighting for Cinematography — Master Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --dark: #0D0D0D;
+    --dark2: #141414;
+    --dark3: #1C1C1C;
+    --card: #1A1A1A;
+    --border: #2A2A2A;
+    --text: #E8E4DC;
+    --muted: #8A8078;
+    --accent-blue: #4A7FA5;
+    --accent-warm: #C4612A;
+    --accent-green: #4A7A5A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  .hero {
+    background: var(--dark2);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 40px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(201,168,76,0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 30%, rgba(74,127,165,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .book-label {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 5px 14px;
+    border-radius: 2px;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .hero h1 span {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .hero-meta {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    margin-top: 16px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .hero-desc {
+    max-width: 600px;
+    margin: 20px auto 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  /* NAV */
+  .toc-nav {
+    background: var(--dark3);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 40px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .toc-nav a {
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 5px 12px;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .toc-nav a:hover {
+    color: var(--gold);
+    border-color: rgba(201,168,76,0.3);
+    background: rgba(201,168,76,0.04);
+  }
+
+  /* MAIN */
+  .main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 50px 24px 80px;
+  }
+
+  /* SECTION */
+  .section {
+    margin-bottom: 70px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    min-width: 40px;
+  }
+
+  .section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .section-icon {
+    margin-left: auto;
+    font-size: 22px;
+    opacity: 0.5;
+  }
+
+  /* CARDS */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 20px;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+
+  .card:hover { border-color: rgba(201,168,76,0.3); }
+
+  .card-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .card p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* CONCEPT BLOCK */
+  .concept {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 4px 4px 0;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+
+  .concept h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .concept p, .concept li {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  .concept ul, .concept ol {
+    padding-left: 18px;
+  }
+
+  .concept li { margin-bottom: 4px; }
+
+  /* QUOTE */
+  .pullquote {
+    border-left: 3px solid var(--gold);
+    padding: 16px 24px;
+    margin: 28px 0;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--text);
+    opacity: 0.85;
+    line-height: 1.6;
+  }
+
+  .pullquote cite {
+    display: block;
+    font-style: normal;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+
+  /* ACTION STEPS */
+  .action-box {
+    background: rgba(201,168,76,0.06);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin-top: 20px;
+  }
+
+  .action-box .action-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .action-box ul {
+    padding-left: 18px;
+  }
+
+  .action-box li {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 6px;
+  }
+
+  /* DIAGRAM-LIKE */
+  .diagram {
+    background: var(--dark3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 24px;
+    margin: 20px 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    line-height: 2;
+  }
+
+  .diagram .diagram-title {
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .diagram .node {
+    display: inline-block;
+    background: var(--card);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin: 4px;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  .diagram .arrow { color: var(--muted); font-size: 16px; }
+
+  /* KELVIN */
+  .kelvin-bar {
+    height: 28px;
+    border-radius: 4px;
+    background: linear-gradient(to right, #FF4500, #FF8C00, #FFD700, #FFFACD, #FFF, #E8F4FF, #C0D8FF, #A0C0FF);
+    margin: 12px 0;
+    border: 1px solid var(--border);
+    position: relative;
+  }
+
+  .kelvin-labels {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* COLOR MOOD */
+  .color-moods {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    margin: 16px 0;
+  }
+
+  .color-mood {
+    border-radius: 4px;
+    padding: 14px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  /* YOUTUBE */
+  .yt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .yt-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 18px 20px;
+    transition: border-color 0.2s;
+    cursor: default;
+  }
+
+  .yt-card:hover { border-color: #ff4444; }
+
+  .yt-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: #ff4444;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .yt-dot { width: 6px; height: 6px; background: #ff4444; border-radius: 50%; }
+
+  .yt-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .yt-card .yt-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .yt-card .yt-focus {
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* TAG CHIPS */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 3px 10px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--muted);
+  }
+
+  /* RULE DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+
+  /* HIGHLIGHT TEXT */
+  .hl { color: var(--gold); font-weight: 500; }
+  .hl-blue { color: var(--accent-blue); }
+  .hl-warm { color: #E8945A; }
+  .hl-green { color: #7ABF8A; }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 40px 24px;
+    border-top: 1px solid var(--border);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 40px 20px 36px; }
+    .toc-nav { padding: 12px 16px; }
+    .main { padding: 36px 16px 60px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .yt-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="book-label">📖 Book Summary · David Landau</div>
+  <h1>Lighting for <span>Cinematography</span></h1>
+  <div class="hero-meta">A Practical Guide to the Art and Craft of Lighting for the Moving Image</div>
+  <p class="hero-desc">Ringkasan esensial yang actionable — dari 286 halaman menjadi panduan praktis yang bisa langsung kamu terapkan di lapangan.</p>
+</div>
+
+<!-- NAV -->
+<nav class="toc-nav">
+  <a href="#fondasi">01. Fondasi Cahaya</a>
+  <a href="#tiga-titik">02. Three-Point Lighting</a>
+  <a href="#tiga-plane">03. Tiga Bidang</a>
+  <a href="#motivasi">04. Motivated Light</a>
+  <a href="#color">05. Warna & Mood</a>
+  <a href="#highlow">06. High/Low Key</a>
+  <a href="#daylight">07. Cahaya Matahari</a>
+  <a href="#malam">08. Night Lighting</a>
+  <a href="#gerak">09. Lighting for Movement</a>
+  <a href="#nonfiction">10. Interview & Dok</a>
+  <a href="#inspirasi">11. Inspirasi Visual</a>
+  <a href="#youtube">12. YouTube Resources</a>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- SECTION 1 -->
+  <div class="section" id="fondasi">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>Fondasi: Memahami Cahaya</h2>
+      <span class="section-icon">💡</span>
+    </div>
+
+    <div class="pullquote">
+      "Light is the chisel that sculpts the mood."
+      <cite>— David Landau, Lighting for Cinematography</cite>
+    </div>
+
+    <p style="color:var(--muted); margin-bottom:20px; font-size:14px;">Sebelum bisa <em>sculpt</em> dengan cahaya, kamu harus paham bahwa cahaya bukan sekadar alat untuk "supaya keliatan." Cahaya adalah <span class="hl">bahasa emosi</span> — ia membentuk mood, mengarahkan mata penonton, dan memberi kedalaman visual pada cerita.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-tag">Fungsi Utama</div>
+        <h3>Apa yang Cahaya Bisa Lakukan</h3>
+        <p>• <span class="hl">Membentuk mood</span> & emosi adegan<br>• Mengarahkan <span class="hl">perhatian mata</span> penonton<br>• Memberi <span class="hl">kedalaman & dimensi</span> pada gambar<br>• Memperkuat <span class="hl">narasi & karakter</span><br>• Memisahkan <span class="hl">subjek dari background</span></p>
+      </div>
+      <div class="card">
+        <div class="card-tag">Inverse Square Law</div>
+        <h3>Hukum Jarak Cahaya</h3>
+        <p>Kalau jarak lampu ke subjek <span class="hl">digandakan</span>, intensitas cahaya turun menjadi <span class="hl">¼ (25%)</span> — bukan setengah. Ini disebut <em>falloff</em>. Artinya: <span class="hl">posisi lampu sangat kritis</span>, perubahan kecil = perubahan besar pada eksposur.</p>
+      </div>
+      <div class="card">
+        <div class="card-tag">Hard vs Soft Light</div>
+        <h3>Karakter Cahaya</h3>
+        <p><span class="hl">Hard light</span> = sumber kecil/jauh → bayangan tajam, dramatis, kontras tinggi.<br><span class="hl">Soft light</span> = sumber besar/diffused → bayangan halus, flattering, modern. Ukuran relatif sumber cahaya terhadap subjek yang menentukan, bukan watt-nya.</p>
+      </div>
+    </div>
+
+    <div class="concept">
+      <h3>Color Temperature — Skala Kelvin</h3>
+      <div class="kelvin-bar"></div>
+      <div class="kelvin-labels">
+        <span>1800K 🕯️<br>Lilin</span>
+        <span>3200K 💡<br>Tungsten</span>
+        <span>4200K<br>Fluorescent</span>
+        <span>5600K ☀️<br>Daylight</span>
+        <span>7000K+ 🌥️<br>Overcast</span>
+      </div>
+      <p style="margin-top:14px; font-size:13px;">
+        <span class="hl-warm">Angka rendah = warm/orange.</span> &nbsp;|&nbsp; <span class="hl-blue">Angka tinggi = cool/blue.</span><br>
+        Penting: saat lampu tungsten <em>di-dim</em>, color temperature-nya ikut turun (makin warm/orange) — jadi menambah gel biru sambil dim tidak akan menghasilkan biru bersih.
+      </p>
+    </div>
+
+    <div class="concept">
+      <h3>Light Meter: Incident vs Reflective</h3>
+      <p>Sinematografi hampir selalu menggunakan <span class="hl">incident meter</span> (mengukur cahaya yang <em>jatuh</em> ke subjek, bukan yang dipantulkan). Ini jauh lebih konsisten. Spot meter dipakai untuk situasi khusus seperti membaca highlight/shadow di background.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="section" id="tiga-titik">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2>Three-Point Lighting — dan Mengapa Itu Cuma Titik Awal</h2>
+      <span class="section-icon">🔺</span>
+    </div>
+
+    <p style="color:var(--muted); margin-bottom:20px; font-size:14px;">John Alton, DP legendaris era 1940-an, pernah bilang: <em>"Three-point lighting adalah tujuh lampu."</em> Mengapa? Karena three-point bukan formula saklek, tapi fondasi yang harus diperluas sesuai kebutuhan adegan.</p>
+
+    <div class="diagram">
+      <div class="diagram-title">Three-Point Lighting Setup</div>
+      <div>
+        <span class="node">BACKLIGHT / RIM</span>
+      </div>
+      <div class="arrow">↙ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↘</div>
+      <div>
+        <span class="node">KEY LIGHT</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span class="node">SUBJEK</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span class="node">FILL LIGHT</span>
+      </div>
+      <div style="margin-top:12px; font-size:11px; color:var(--muted);">Semua relatif terhadap posisi kamera</div>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-tag">Key Light</div>
+        <h3>Cahaya Utama</h3>
+        <p>Cahaya <span class="hl">paling terang & dominan</span>. Posisi klasik: 45° dari kamera, sudut ke bawah 45°. Ini adalah <span class="hl">motivated source</span> — seolah-olah dari jendela, lampu meja, atau matahari. Menentukan karakter visual adegan.</p>
+      </div>
+      <div class="card">
+        <div class="card-tag">Fill Light</div>
+        <h3>Cahaya Pengisi</h3>
+        <p>Mengisi bayangan dari key light. <span class="hl">Selalu lebih redup</span> dari key. Hampir selalu diffused. Tidak boleh menciptakan bayangannya sendiri. Kontras ditentukan dari rasio key vs fill.</p>
+      </div>
+      <div class="card">
+        <div class="card-tag">Backlight / Rim</div>
+        <h3>Cahaya Belakang</h3>
+        <p>Posisi di belakang subjek, berlawanan dengan kamera. Fungsi utama: <span class="hl">memisahkan subjek dari background</span>, memberi "rim" cahaya di kepala/bahu. Tanpa ini, subjek bisa "tenggelam" ke background.</p>
+      </div>
+    </div>
+
+    <div class="concept">
+      <h3>Lampu Tambahan yang Dipakai DP Profesional</h3>
+      <ul>
+        <li><span class="hl">Eye Light / Obie Light</span> — lampu kecil di dekat lensa untuk menciptakan kilatan di mata aktor. Standar Hollywood untuk close-up.</li>
+        <li><span class="hl">Kicker</span> — ¾ backlight yang menghighlight tulang pipi. Sering bisa menggabungkan fungsi backlight + kicker dalam satu posisi.</li>
+        <li><span class="hl">Background Light</span> — lampu khusus untuk menerangi latar belakang, terpisah dari pencahayaan subjek.</li>
+        <li><span class="hl">Set / Practical Dressing</span> — lampu-lampu yang ada di dalam set (desk lamp, TV, dll.) yang terlihat di frame.</li>
+      </ul>
+    </div>
+
+    <div class="action-box">
+      <div class="action-label">⚡ Action Step</div>
+      <ul>
+        <li>Latihan dengan satu lampu dulu — pelajari bagaimana bayangan berubah saat kamu geser posisi lampu.</li>
+        <li>Kemudian tambah fill, lalu backlight. Rasakan perbedaannya secara visual sebelum menambah lampu ke-4.</li>
+        <li>Selalu tanya: "Dari mana seharusnya cahaya ini datang?" sebelum menempatkan lampu.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="section" id="tiga-plane">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2>Tiga Bidang (Three Planes) — Lighting Seluruh Shot</h2>
+      <span class="section-icon">🎬</span>
+    </div>
+
+    <p style="color:var(--muted); margin-bottom:20px; font-size:14px;">Kesalahan terbesar filmmaker pemula: hanya menerangi <em>subjek</em>, bukan <em>seluruh frame</em>. Seorang DP profesional selalu memikirkan tiga bidang secara bersamaan.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-tag">Plane 1 — Foreground</div>
+        <h3>Latar Depan</h3>
+        <p>Elemen di antara kamera dan subjek. Sering diabaikan. Memberikan <span class="hl">kedalaman & dimensi</span>. Bisa berupa tanaman, furniture, atau cahaya yang sengaja dibiarkan jatuh di lantai/dinding depan.</p>
+      </div>
+      <div class="card">
+        <div class="card-tag">Plane 2 — Subject</div>
+        <h3>Subjek Utama</h3>
+        <p>Aktor atau objek yang menjadi fokus cerita. Di sinilah three-point lighting diterapkan. <span class="hl">Pencahayaannya harus bermotivasi</span> dan konsisten dengan dunia fiksi adegan.</p>
+      </div>
+      <div class="card">
+        <div class="card-tag">Plane 3 — Background</div>
+        <h3>Latar Belakang</h3>
+        <p>Paling sering diabaikan, padahal <span class="hl">background yang gelap rata-rata terlihat amatir</span>. Background harus punya kedalaman, gradasi, atau elemen visual yang mendukung mood — bukan hanya hitam datar.</p>
+      </div>
+    </div>
+
+    <div class="action-box">
+      <div class="action-label">⚡ Action Step</div>
+      <ul>
+        <li>Sebelum shoot, tanyakan: apakah ketiga bidang sudah punya pencahayaan yang disengaja?</li>
+        <li>Background boleh lebih gelap dari subjek, tapi tidak boleh <em>dead black</em> — kecuali itu pilihan artistik yang sadar.</li>
+        <li>Gunakan practical lights (lampu dalam set) untuk memberikan "kehidupan" ke background secara natural.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="section" id="motivasi">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2>Motivated Light — Prinsip Terpenting dalam Film</h2>
+      <span class="section-icon">🎭</span>
+    </div>
+
+    <div class="pullquote">
+      "Lighting should be consistent with its source — in color, intensity, texture, and angle. This helps believability of the image, which helps believability of the story."
+      <cite>— David Landau</cite>
+    </div>
+
+    <p style="color:var(--muted); margin-bottom:20px; font-size:14px;"><span class="hl">Motivated lighting</span> artinya setiap lampu yang kamu pasang harus seolah-olah berasal dari sumber yang masuk akal dalam dunia cerita: jendela, lampu meja, perapian, atau bulan. Penonton tidak perlu tahu dari mana cahayanya — tapi mereka <em>merasakan</em> kalau tidak konsisten.</p>
+
+    <div class="concept">
+      <h3>Cara Menerapkan Motivated Lighting</h3>
+      <ul>
+        <li><span class="hl">Warna harus logis</span>: cahaya dari jendela siang = daylight (5600K); lampu meja = tungsten (3200K). Mencampur tanpa alasan = gambar aneh.</li>
+        <li><span class="hl">Sudut harus logis</span>: kalau "cahayanya dari jendela kiri," key light harus dari kiri.</li>
+        <li><span class="hl">Intensitas relatif</span>: cahaya dari sumber kecil (lilin) tidak akan seterang ruangan. Patuhi logika ini.</li>
+        <li><span class="hl">Practical lights</span>: biarkan lampu yang ada di set (bisa terlihat di frame) menjadi "alibi" untuk key light kamu yang lebih besar di luar frame.</li>
+      </ul>
+    </div>
+
+    <div class="concept">
+      <h3>Common Practical Lighting Setups</h3>
+      <ul>
+        <li><span class="hl">Cross Key</span> — dua subjek saling berhadapan, key masing-masing dari arah berlawanan. Efisien untuk dialog.</li>
+        <li><span class="hl">Chicken Coop</span> — lampu besar overhead (bounce/soft) untuk menerangi grup besar. Cocok untuk meja makan, rapat, dll.</li>
+        <li><span class="hl">China Ball</span> — bola kertas/paper lantern dengan bohlam di dalamnya. Cahaya omnidirectional yang sangat soft. Bagus untuk lokasi sempit.</li>
+        <li><span class="hl">Window Bounce</span> — cahaya matahari dipantulkan dengan foam board/reflector masuk jendela. Free & natural.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="section" id="color">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2>Warna sebagai Bahasa Emosi</h2>
+      <span class="section-icon">🎨</span>
+    </div>
+
+    <p style="color:var(--muted); margin-bottom:20px; font-size:14px;">Di sinema, warna cahaya bukan dekorasi — ini adalah <span class="hl">pernyataan emosional</span>. Belajarlah dari theatrical lighting yang menggunakan color secara ekstensif untuk kontras dan mood. Film menggunakannya lebih subtle, tapi dampaknya sama kuatnya.</p>
+
+    <div class="color-moods">
+      <div class="color-mood" style="background: rgba(30,60,120,0.4); color:#90B4E8;">🔵 Biru<br><small>Malam, dingin, kesedihan, misteri, isolasi</small></div>
+      <div class="color-mood" style="background: rgba(180,80,20,0.4); color:#F0A060;">🟠 Warm/Orange<br><small>Sore, nostalgia, kehangatan, bahaya</small></div>
+      <div class="color-mood" style="background: rgba(30,100,50,0.4); color:#80C890;">🟢 Hijau<br><small>Teknologi, sakit, alien, tidak natural</small></div>
+      <div class="color-mood" style="background: rgba(150,30,100,0.4); color:#E080C0;">🟣 Ungu/Magenta<br><small>Supernatural, mimpi, feminin, mewah</small></div>
+      <div class="color-mood" style="background: rgba(200,160,20,0.4); color:#F0D060;">🟡 Kuning<br><small>Matahari, kebahagiaan, klasik, tungsten</small></div>
+      <div class="color-mood" style="background: rgba(50,50,50,0.6); color:#C0C0C0;">⚪ Netral/White<br><small>Dokumenter, realisme, fakta, objektif</small></div>
+    </div>
+
+    <div class="concept">
+      <h3>Menggunakan Gel dengan Benar</h3>
+      <ul>
+        <li><span class="hl">CTB (Color Temperature Blue)</span> — mengubah tungsten (3200K) menjadi daylight (5600K). Berguna saat mix sumber cahaya.</li>
+        <li><span class="hl">CTO (Color Temperature Orange)</span> — kebalikannya. Membuat daylight terasa warm/tungsten.</li>
+        <li><span class="hl">Theatrical gels</span> — Rosco, Lee, GAM. Untuk warna kreatif. Mulai subtle, karena kamera kadang lebih sensitif dari mata.</li>
+        <li>Warning: <span class="hl">saat lampu di-dim, color temperature berubah</span> → gel warna tidak bekerja seperti yang kamu bayangkan jika lampunya dimming.</li>
+      </ul>
+    </div>
+
+    <div class="concept">
+      <h3>Kontras Warna Dingin vs Hangat</h3>
+      <p>Salah satu teknik paling efektif: gunakan <span class="hl-warm">cahaya warm (orange)</span> untuk key/subject dan <span class="hl-blue">cahaya cool (blue)</span> untuk background atau fill — atau sebaliknya. Kontras warna ini menciptakan visual yang terasa sinematik dan berdimensi secara alami, dan dipakai di hampir semua film Hollywood.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="section" id="highlow">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2>High Key, Low Key & Chiaroscuro</h2>
+      <span class="section-icon">☯️</span>
+    </div>
+
+    <p style="color:var(--muted); margin-bottom:16px; font-size:14px;">Ini bukan soal terang atau gelapnya gambar — ini soal <span class="hl">rasio kontras</span> dan apa yang kamu pilih untuk diperlihatkan atau disembunyikan.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-tag">High Key Lighting</div>
+        <h3>Cahaya Merata & Minim Bayangan</h3>
+        <p>Kontras rendah, fill light kuat, sedikit bayangan. <span class="hl">Feeling: ceria, aman, komedi, fakta, reality show.</span><br>Contoh genre: sitcom, iklan produk, talk show.</p>
+      </div>
+      <div class="card">
+        <div class="card-tag">Low Key Lighting</div>
+        <h3>Bayangan Dominan, Kontras Tinggi</h3>
+        <p>Fill light minimal/tidak ada, area gelap sangat gelap. <span class="hl">Feeling: tegang, misterius, berbahaya, emosional.</span><br>TV referensi: Supernatural, Bates Motel, noir film.</p>
+      </div>
+      <div class="card">
+        <div class="card-tag">Chiaroscuro</div>
+        <h3>Kontras Dramatis ala Lukisan</h3>
+        <p>Terinspirasi pelukis Baroque (Caravaggio, Rembrandt). <span class="hl">Cahaya keras dari satu arah dengan transisi tiba-tiba ke kegelapan.</span> Efek visual yang sangat sinematik.</p>
+      </div>
+    </div>
+
+    <div class="concept">
+      <h3>Rembrandt Lighting — Teknik Portrait Klasik</h3>
+      <p>Satu sisi wajah terang, sisi lain dalam bayangan dalam. Ciri khas: ada <span class="hl">segitiga cahaya kecil di pipi sisi gelap</span>. Tidak ada backlight, fill sangat minim. Sangat cocok untuk <span class="hl">interview sinematik, portrait, dan adegan serius</span>. Bisa diciptakan cukup dengan satu softbox besar dari atas-samping.</p>
+    </div>
+
+    <div class="concept">
+      <h3>Butterfly / Glamour Lighting</h3>
+      <p>Lampu langsung di atas kamera dan di atas wajah subjek → menciptakan bayangan kupu-kupu di bawah hidung. Dipakai untuk <span class="hl">potret glamour dan kecantikan</span>. Mempertegas tulang pipi dan memberikan kesan elegan.</p>
+    </div>
+
+    <div class="concept">
+      <h3>Exposure sebagai Alat Artistik</h3>
+      <p>DP tidak selalu expose untuk wajah subjek. Terkadang <span class="hl">overexpose dengan sengaja</span> (wajah di depan jendela yang "membakar") atau <span class="hl">underexpose</span> untuk memperkuat mood emosional. Pilih exposure yang mendukung <em>intention of the scene</em>, bukan yang "technically correct."</p>
+    </div>
+  </div>
+
+  <!-- SECTION 7 -->
+  <div class="section" id="daylight">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <h2>Bekerja dengan Cahaya Matahari</h2>
+      <span class="section-icon">☀️</span>
+    </div>
+
+    <div class="pullquote">
+      "Your biggest light is the sun — it gives you more latitude if you simply learn to use it."
+      <cite>— David Landau</cite>
+    </div>
+
+    <div class="concept">
+      <h3>Exterior: Kapan Matahari Bekerja Untukmu</h3>
+      <ul>
+        <li><span class="hl">Golden Hour (pagi & sore)</span>: matahari rendah → bayangan panjang, cahaya warm, modeling dramatis. Ini waktu terbaik untuk shoot dramatis/sinematik.</li>
+        <li><span class="hl">Overcast / mendung</span>: langit jadi softbox raksasa. Cahaya merata, flattering untuk wajah, cocok untuk drama emosional.</li>
+        <li><span class="hl">Jam 10-14 (midday)</span>: matahari overhead → bayangan di bawah mata (raccoon eyes). Hindari atau gunakan reflector/fill light dari bawah.</li>
+        <li><span class="hl">Bayangan</span>: menempatkan subjek di bawah bayangan (shade) sementara background terkena sinar matahari → backlight natural yang indah.</li>
+      </ul>
+    </div>
+
+    <div class="concept">
+      <h3>Interior: Bekerja dengan Jendela (Ch. 8)</h3>
+      <ul>
+        <li>Jendela menghasilkan cahaya <span class="hl">soft dan directional</span> — sangat flattering dan sinematik.</li>
+        <li>Masalah: <span class="hl">exposure gap</span> — wajah vs luar jendela terlalu kontras. Solusi: tambah fill dari dalam (reflector/LED), atau ekspos untuk outside dan biarkan interior gelap (moody).</li>
+        <li><span class="hl">Diffuse jendela</span> dengan full CTB gel atau diffusion material untuk melembutkan sumber dan mengontrol rasio lebih mudah.</li>
+        <li>Window sebagai <span class="hl">key light natural</span>: posisikan subjek dekat jendela, arahkan wajah ¾ ke jendela → Rembrandt lighting gratis.</li>
+      </ul>
+    </div>
+
+    <div class="action-box">
+      <div class="action-label">⚡ Action Step</div>
+      <ul>
+        <li>Untuk shoot luar ruangan, lakukan location scout di jam yang sama dengan jam shoot yang direncanakan — cahaya berubah drastis per jam.</li>
+        <li>Bawa reflector putih dan silver ke setiap shoot outdoor. Itu adalah fill light gratis.</li>
+        <li>Kalau harus shoot midday, cari lokasi di bawah kanopi atau bayangan bangunan.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 8 -->
+  <div class="section" id="malam">
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <h2>Night Lighting — Malam yang Believable</h2>
+      <span class="section-icon">🌙</span>
+    </div>
+
+    <div class="concept">
+      <h3>Kesalahan Terbesar: Terlalu Gelap</h3>
+      <p>Mata manusia bisa melihat sangat baik dalam cahaya sedikit. <span class="hl">Membuat adegan terlalu gelap adalah tidak realistis</span>, bukan sinematik. Adegan gelap yang tidak bisa dibaca membuat penonton frustrasi dan keluar dari cerita. Night scene harus <span class="hl">terasa gelap, tapi tetap visible.</span></p>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-tag">Night Interior</div>
+        <h3>Dalam Ruangan Malam</h3>
+        <p>Gunakan <span class="hl">practical lights</span> sebagai motivated source (lampu meja, TV, lilin). Tambah lampu tersembunyi yang memperkuat efek practical. Background harus tetap punya detail — bukan hitam total.</p>
+      </div>
+      <div class="card">
+        <div class="card-tag">Night Exterior</div>
+        <h3>Luar Ruangan Malam</h3>
+        <p>Simulasi <span class="hl">moonlight</span>: lampu putih/cool dari atas di sudut rendah. Background harus diterangi terpisah — streetlight, storefront, dll. Totally black background terlihat fake & amatir.</p>
+      </div>
+    </div>
+
+    <div class="concept">
+      <h3>Teknik Simulasi Moonlight</h3>
+      <ul>
+        <li>Gunakan <span class="hl">1kW PAR atau HMI</span> dengan ½ CTB dari sudut tinggi sebagai "bulan."</li>
+        <li>Bounce cahaya besar ke <span class="hl">foamcore putih</span> untuk menciptakan fill ambient yang soft (imitasi langit malam).</li>
+        <li>Terangi background secara terpisah: gunakan lampu kecil tersembunyi di balik objek untuk rim/praktis background.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 9 -->
+  <div class="section" id="gerak">
+    <div class="section-header">
+      <span class="section-num">09</span>
+      <h2>Lighting untuk Gerakan</h2>
+      <span class="section-icon">🎥</span>
+    </div>
+
+    <p style="color:var(--muted); margin-bottom:16px; font-size:14px;">Adegan bukan foto. Aktor bergerak, kamera bergerak. Lighting harus mampu mengikuti atau mengakomodasi movement tanpa terlihat artifisial.</p>
+
+    <div class="concept">
+      <h3>Strategi Dasar untuk Moving Actors</h3>
+      <ul>
+        <li><span class="hl">Light the end mark first</span> — posisi akhir aktor adalah yang paling penting. Dari situ design lighting-mu, lalu pastikan path menuju ke sana juga cukup terang.</li>
+        <li><span class="hl">Ambient soft lighting</span> — untuk adegan dengan banyak gerakan, gunakan satu atau dua sumber besar yang soft dan omnidirectional. Ini mengurangi "hot spots" saat aktor berpindah.</li>
+        <li><span class="hl">Pelajari blocking sebelum lighting</span> — selalu diskusi dengan sutradara tentang pergerakan aktor sebelum setup lampu.</li>
+        <li>Posisikan lampu lebih <span class="hl">jauh dari subjek</span> agar falloff lebih gradual dan konsisten saat aktor bergerak.</li>
+      </ul>
+    </div>
+
+    <div class="concept">
+      <h3>Moving Camera</h3>
+      <p>Ketika kamera bergerak (dolly, handheld), pastikan pencahayaan tidak tiba-tiba memperlihatkan lampu atau rigging yang tersembunyi. <span class="hl">Selalu pantau monitor saat camera move</span>, bukan hanya saat statis.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 10 -->
+  <div class="section" id="nonfiction">
+    <div class="section-header">
+      <span class="section-num">10</span>
+      <h2>Interview & Dokumenter Lighting</h2>
+      <span class="section-icon">🎙️</span>
+    </div>
+
+    <p style="color:var(--muted); margin-bottom:16px; font-size:14px;">Cara menerangi narasumber menentukan <span class="hl">bagaimana penonton mempercayai mereka</span>. Ini bukan soal teknis semata — ini adalah keputusan editorial.</p>
+
+    <div class="concept">
+      <h3>Prinsip Interview Lighting</h3>
+      <ul>
+        <li><span class="hl">Selalu gunakan soft light</span> untuk wajah narasumber — hard light untuk interview terasa harsh dan tidak profesional.</li>
+        <li>Posisi klasik: <span class="hl">¾ three-point</span> — key dari satu sisi, fill dari sisi lain (lebih redup), backlight untuk separasi.</li>
+        <li><span class="hl">Background harus disengaja</span>: blur natural dengan depth of field atau terangi dengan cahaya terpisah yang mendukung konteks cerita.</li>
+        <li>Untuk corporate/formal: <span class="hl">high key, clean, bersih.</span></li>
+        <li>Untuk dokumenter emosional: <span class="hl">lebih rendah kontras fill, lebih dramatis.</span></li>
+        <li>Untuk newsmagazine: <span class="hl">natural, tidak terkesan "terlalu lighting."</span></li>
+      </ul>
+    </div>
+
+    <div class="action-box">
+      <div class="action-label">⚡ Action Step</div>
+      <ul>
+        <li>Selalu lihat contoh interview dari program/film yang ingin kamu tiru tonalnya sebelum setup lampu.</li>
+        <li>Gunakan eye light (LED kecil dekat lensa) bahkan untuk interview — kilatan di mata membuat narasumber terlihat lebih hidup dan terpercaya.</li>
+        <li>Jangan lupa background — bahkan untuk interview run-and-gun, posisikan narasumber di depan background yang ada elemen depth-nya.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 11 -->
+  <div class="section" id="inspirasi">
+    <div class="section-header">
+      <span class="section-num">11</span>
+      <h2>Inspirasi & Menciptakan Visual Language</h2>
+      <span class="section-icon">🎨</span>
+    </div>
+
+    <div class="pullquote">
+      "Light the scene, not just the shot."
+      <cite>— DP Joseph di Gennaro, dikutip dalam buku ini</cite>
+    </div>
+
+    <p style="color:var(--muted); margin-bottom:20px; font-size:14px;">DP terbaik tidak memulai dari "mau pakai lampu apa" — mereka mulai dari <span class="hl">emotional intention of the scene</span>, lalu mencari referensi visual untuk mewujudkannya.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-tag">Dutch Masters Look</div>
+        <h3>Vermeer & Rembrandt</h3>
+        <p>Cahaya soft dari <span class="hl">jendela besar overhead</span>, satu arah. Background gelap. Detail bercahaya pop keluar dari kegelapan. Inspirasi: fog dan overcast Eropa Utara. Perfect untuk period piece atau drama intim.</p>
+      </div>
+      <div class="card">
+        <div class="card-tag">Pelajari DP Legendaris</div>
+        <h3>Referensi Sinema Besar</h3>
+        <p><span class="hl">Gordon Willis</span> (The Godfather), <span class="hl">Conrad Hall</span> (Road to Perdition), <span class="hl">Vittorio Storaro</span> (Apocalypse Now), <span class="hl">Roger Deakins</span> (Blade Runner 2049). Pelajari karya mereka sebagai referensi visual.</p>
+      </div>
+      <div class="card">
+        <div class="card-tag">Proses Kreatif</div>
+        <h3>Dari Script ke Visual</h3>
+        <p>Baca script → diskusi dengan sutradara → tentukan <span class="hl">color palette & contrast ratio</span> untuk keseluruhan film → buat shot list → baru design lighting per scene. Konsistensi visual = identitas film.</p>
+      </div>
+    </div>
+
+    <div class="concept">
+      <h3>Sumber Inspirasi yang Dipakai DP Profesional</h3>
+      <ul>
+        <li><span class="hl">Lukisan</span>: Caravaggio, Vermeer, Rembrandt, Edward Hopper — semua adalah master cahaya sebelum ada kamera.</li>
+        <li><span class="hl">Fotografi</span>: Henri Cartier-Bresson, Ansel Adams, Irving Penn.</li>
+        <li><span class="hl">Film-film referensi</span>: riset film dengan genre/periode/mood serupa sebelum produksi.</li>
+        <li><span class="hl">Kehidupan sehari-hari</span>: perhatikan bagaimana cahaya jatuh di warung kopi, pasar, atau di bawah pohon. Kamera terbaik adalah mata yang terlatih.</li>
+      </ul>
+    </div>
+
+    <div class="action-box">
+      <div class="action-label">⚡ Action Step Akhir — Habit Seorang Cinematographer</div>
+      <ul>
+        <li>Mulai kebiasaan <strong>moodboard visual</strong> untuk setiap project — kumpulkan referensi lighting sebelum angkat kamera.</li>
+        <li>Tonton film favorit tanpa suara, fokus hanya pada bagaimana cahaya digunakan di setiap adegan.</li>
+        <li>Kunjungi museum atau buka buku seni lukis — Caravaggio adalah guru cinematography terbaik yang tidak pernah pegang kamera.</li>
+        <li>Setiap shoot, tanyakan 3 pertanyaan: <em>Dari mana sumber cahayanya? Apa mood-nya? Apa yang ingin saya sembunyikan?</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- YOUTUBE SECTION -->
+  <div class="section" id="youtube">
+    <div class="section-header">
+      <span class="section-num">12</span>
+      <h2>Channel & Video YouTube untuk Belajar Lighting</h2>
+      <span class="section-icon">📺</span>
+    </div>
+
+    <p style="color:var(--muted); margin-bottom:24px; font-size:14px;">Dikurasi khusus untuk filmmaker yang ingin memperdalam ilmu lighting secara visual dan praktis. Dari teori dasar hingga behind-the-scenes teknik Hollywood.</p>
+
+    <div class="yt-grid">
+      <div class="yt-card">
+        <div class="yt-tag"><div class="yt-dot"></div> CHANNEL</div>
+        <h3>Indy Mogul</h3>
+        <p class="yt-desc">Tutorial lighting praktis untuk indie filmmaker. Breakdown lighting setup dari film populer dengan gear terjangkau. Very actionable.</p>
+        <div class="yt-focus">🔑 Recreating Film Looks · Budget Lighting</div>
+        <div class="tags"><span class="tag">Pemula–Menengah</span><span class="tag">Praktis</span></div>
+      </div>
+
+      <div class="yt-card">
+        <div class="yt-tag"><div class="yt-dot"></div> CHANNEL</div>
+        <h3>Film Riot</h3>
+        <p class="yt-desc">Cinematography, lighting, dan filmmaking secara menyeluruh. Episodenya punya depth yang baik antara teori dan eksekusi. Host Ryan Connolly sangat engaging.</p>
+        <div class="yt-focus">🔑 Lighting Techniques · Storytelling</div>
+        <div class="tags"><span class="tag">Pemula–Menengah</span><span class="tag">Storytelling</span></div>
+      </div>
+
+      <div class="yt-card">
+        <div class="yt-tag"><div class="yt-dot"></div> CHANNEL</div>
+        <h3>Shane Hurlbut ASC</h3>
+        <p class="yt-desc">ASC-certified cinematographer membagikan teknik Hollywood. Sangat teknikal dan mendalam. Ideal untuk filmmaker yang ingin naik ke level professional.</p>
+        <div class="yt-focus">🔑 Pro Cinematography · Hollywood Techniques</div>
+        <div class="tags"><span class="tag">Menengah–Mahir</span><span class="tag">Pro Level</span></div>
+      </div>
+
+      <div class="yt-card">
+        <div class="yt-tag"><div class="yt-dot"></div> CHANNEL</div>
+        <h3>Wolfcrow (Sareesh Sudhakaran)</h3>
+        <p class="yt-desc">Deep dive ke teori dan ilmu di balik cinematography. Penjelasan Kelvin, exposure, dan lighting science yang paling jelas di YouTube. Wajib tonton.</p>
+        <div class="yt-focus">🔑 Teori Cahaya · Color Science · Exposure</div>
+        <div class="tags"><span class="tag">Semua Level</span><span class="tag">Teoritikal</span></div>
+      </div>
+
+      <div class="yt-card">
+        <div class="yt-tag"><div class="yt-dot"></div> CHANNEL</div>
+        <h3>cinematography.com / ASC</h3>
+        <p class="yt-desc">American Society of Cinematographers. Interview dan masterclass dengan DP-DP Hollywood terbaik. Insights dari Deakins, Lubezki, dan Storaro dalam satu tempat.</p>
+        <div class="yt-focus">🔑 DP Interviews · Industry Insights</div>
+        <div class="tags"><span class="tag">Mahir</span><span class="tag">Inspirasi</span></div>
+      </div>
+
+      <div class="yt-card">
+        <div class="yt-tag"><div class="yt-dot"></div> CHANNEL</div>
+        <h3>The Film Look</h3>
+        <p class="yt-desc">Fokus pada visual storytelling dan bagaimana lighting mendukung narasi. Pendekatan yang sangat sinematik dan artistik, bukan hanya teknis.</p>
+        <div class="yt-focus">🔑 Visual Storytelling · Artistic Approach</div>
+        <div class="tags"><span class="tag">Menengah</span><span class="tag">Artistik</span></div>
+      </div>
+
+      <div class="yt-card">
+        <div class="yt-tag"><div class="yt-dot"></div> CHANNEL</div>
+        <h3>ZEISS Cinematography</h3>
+        <p class="yt-desc">Behind-the-scenes dan interviews dengan cinematographer kelas dunia. Memperlihatkan bagaimana keputusan lighting dibuat di produksi besar sesungguhnya.</p>
+        <div class="yt-focus">🔑 BTS Pro Productions · Lens & Light</div>
+        <div class="tags"><span class="tag">Menengah–Mahir</span><span class="tag">BTS</span></div>
+      </div>
+
+      <div class="yt-card">
+        <div class="yt-tag"><div class="yt-dot"></div> VIDEO SPESIFIK</div>
+        <h3>Search: "Every Frame a Painting"</h3>
+        <p class="yt-desc">Channel yang sudah tidak aktif tapi essay filmnya tetap jadi mahakarya. Cari episode tentang David Fincher, Wes Anderson, dan Kubrick — semuanya membahas visual language yang kuat.</p>
+        <div class="yt-focus">🔑 Film Analysis · Visual Language</div>
+        <div class="tags"><span class="tag">Semua Level</span><span class="tag">Analisis Film</span></div>
+      </div>
+
+      <div class="yt-card">
+        <div class="yt-tag"><div class="yt-dot"></div> VIDEO SPESIFIK</div>
+        <h3>Search: "Roger Deakins Masterclass"</h3>
+        <p class="yt-desc">Klip dari masterclass Roger Deakins ASC, BSC — salah satu cinematographer terbaik sepanjang masa. Cara berpikirnya tentang cahaya akan mengubah cara kamu melihat gambar.</p>
+        <div class="yt-focus">🔑 Master Cinematographer Mindset</div>
+        <div class="tags"><span class="tag">Semua Level</span><span class="tag">Inspirasi</span></div>
+      </div>
+    </div>
+
+    <div class="action-box">
+      <div class="action-label">📌 Urutan Belajar yang Disarankan</div>
+      <ul>
+        <li><strong>Minggu 1–2:</strong> Wolfcrow — pahami teori Kelvin, exposure, hard vs soft light.</li>
+        <li><strong>Minggu 3–4:</strong> Indy Mogul + Film Riot — praktik setup 3-point, coba di rumah dengan 1-2 lampu.</li>
+        <li><strong>Bulan 2:</strong> The Film Look + Every Frame a Painting — latih mata untuk visual storytelling.</li>
+        <li><strong>Ongoing:</strong> Shane Hurlbut + ASC — untuk terus naik level dan dapat perspektif profesional.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div style="margin-bottom:8px; color: var(--gold); letter-spacing:2px;">LIGHTING FOR CINEMATOGRAPHY</div>
+  David Landau — Bloomsbury Publishing, 2014<br>
+  Ringkasan dibuat untuk keperluan belajar personal
+</div>
+
+</body>
+</html>
